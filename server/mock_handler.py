@@ -13,8 +13,8 @@ class MockRequestHandler:
 
     def send_header(self, key, value):
         if key not in self.headers:
-            self.header[key] = []
-        self.header[key].append(value)
+            self.headers[key] = []
+        self.headers[key].append(value)
 
     def end_headers(self):
         pass

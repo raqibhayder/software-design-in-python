@@ -20,7 +20,7 @@ class ServerException(Exception):
         super().__init__(message)
 
 
-class ApplicationRequestHandler:
+class ApplicationRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
             url_path = self.path.lstrip("/")
@@ -56,10 +56,6 @@ class ApplicationRequestHandler:
 
 
 if __name__ == '__main__':
-    class RequestHandler(BaseHTTPRequestHandler, ApplicationRequestHandler):
-        pass
-
-
     serverAddress = ('', 8080)
-    server = HTTPServer(serverAddress, RequestHandler)
+    server = HTTPServer(serverAddress, ApplicationRequestHandler)
     server.serve_forever()
