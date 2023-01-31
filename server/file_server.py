@@ -14,11 +14,13 @@ ERROR_PAGE = """\
 </html>
 """
 
+
 class ServerException(Exception):
     def __init__(self, message):
         super().__init__(message)
 
-class RequestHandler(BaseHTTPRequestHandler, HTTPServer):
+
+class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
             url_path = self.path.lstrip("/")
@@ -52,7 +54,8 @@ class RequestHandler(BaseHTTPRequestHandler, HTTPServer):
         self.end_headers()
         self.wfile.write(content)
 
+
 if __name__ == "__main__":
     server_address = ("", 8080)
     server = HTTPServer(server_address, RequestHandler)
-    server.serve_forever()  
+    server.serve_forever()
